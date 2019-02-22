@@ -1,7 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormA from '../../components/FormA';
-import { updateFormValue } from '../../reducers/FormA';
+import * as AReducer from '../../reducers/FormA';
+import { toggleForm } from '../../reducers/FormB';
 
 // hàm này giúp react-redux lấy ra những giá trị trong reducer
 const mapStateToProps = (store) => {
@@ -11,14 +12,14 @@ const mapStateToProps = (store) => {
     name: formA.name,
     phoneNumber: formA.phoneNumber,
   }
-} 
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     // updateFormValue: bindActionCreators(updateFormValue, dispatch),
     // tương đương với ở trên
-    updateFormValue: function(fieldName, value) {
-      dispatch(updateFormValue(fieldName, value));
+    updateFormValue: function (fieldName, value) {
+      dispatch(AReducer.updateFormValue(fieldName, value));
       // dispatch({
       //   type: FORMA_UPDATE,
       //   // es5
@@ -27,6 +28,11 @@ const mapDispatchToProps = (dispatch) => {
       //     value: value,
       //   }
       // })
+    },
+    finishForm: function (state) {
+      dispatch(AReducer.finishForm(state));
+      dispatch(AReducer.toggleForm(false));
+      dispatch(toggleForm(true));
     }
   }
 }

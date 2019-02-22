@@ -1,6 +1,9 @@
+import { FORMB_OPEN } from './FormB';
+
 export const FORMA_SAVE = 'formA/SAVE';
 export const FORMA_UPDATE = 'formA/UPDATE';
 export const FORMA_CREATE = 'formA/CREATE';
+export const FORMA_FINISH = 'formA/FINISH';
 export const FORMA_OPEN = 'formA/OPEN';
 export const FORMA_CLOSE = 'formA/CLOSE';
 
@@ -23,6 +26,21 @@ export const updateFormValue = (fieldName, value) => {
     //   fieldName,
     //   value,
     // }
+  }
+}
+
+export const toggleForm = (isOpen) => {
+  return {
+    type: (isOpen) ? FORMA_OPEN : FORMA_CLOSE
+  }
+}
+
+export const finishForm = (form) => {
+  return {
+    type: FORMA_FINISH,
+    payload: {
+      form,
+    }
   }
 }
 
@@ -56,6 +74,12 @@ const formAReducer = (state = initialState, action) => {
         // {
         //   a: 123
         // }
+      }
+    }
+    case FORMA_FINISH: {
+      return {
+        ...state,
+        // isOpen: false,
       }
     }
     default:

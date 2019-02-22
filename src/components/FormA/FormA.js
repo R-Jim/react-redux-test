@@ -1,20 +1,4 @@
 import React from 'react';
-// import Redux from 'redux';
-
-// function formA(state, action) {
-//     if (typeof state === 'undefined') {
-//         return 0;
-//     }
-//     // switch (action.type) {
-//     //     case 'OPEN': return state = { open: true };
-//     //     case 'CLOSE': return state = { open: false };
-//     //     case 'SAVE': return state = { Object.asignas };
-//     //     default: return state;
-//     // }
-// }
-
-// var storeA = Redux.createStore();
-
 class FormA extends React.Component {
 
     handleNameInutChanged = (e) => {
@@ -29,6 +13,11 @@ class FormA extends React.Component {
         updateFormValue('phoneNumber', value);
     }
 
+    handleFinishForm = (name, phone) => {
+        const finishForm = this.props.finishForm;
+        finishForm({ name, phone });
+    }
+
     render() {
         const isOpen = this.props.isOpen;
         const name = this.props.name;
@@ -41,8 +30,9 @@ class FormA extends React.Component {
                 <div>Name: </div>
                 <input
                     type="text"
-                    value={name}  
+                    value={name}
                     onChange={this.handleNameInutChanged}
+                    required
                 />
                 <div>Phone: </div>
                 <input
@@ -50,8 +40,9 @@ class FormA extends React.Component {
                     value={phoneNumber}
                     onChange={this.handlePhoneInutChanged}
                 />
+                <br />
                 <button type="button">Reset</button>
-                <button type="button">Finish</button>
+                <button type="submit" onClick={() => this.handleFinishForm({ name }, { phoneNumber })}>Finish</button>
             </form>
         );
     }

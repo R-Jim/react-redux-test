@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
 import formA from './FormA';
-import FormB from './FormB';
+import formB from './FormB';
+import formC from './FormC';
+import receipt from './Receipt';
 
 export default combineReducers({
-  formA: formA,
-  FormB,
+  formA,
+  formB,
+  formC,
+  receipt
 });
